@@ -1,0 +1,10 @@
+    template_home:                  /home/article/Article/tmpl
+    site_name:                      Article
+    app_name:                       Article v1.0
+    home_page:                      http://article.soupmode.com
+    site_description:               Article Preview
+    domain_name:                    article.soupmode.com
+    css_dir_url:                    http://article.soupmode.com/css 
+    maincss_url:                    http://article.soupmode.com/css/article.css
+    api_url:                        http://article.soupmode.com/api/v1
+    author_name:                    Testuser 

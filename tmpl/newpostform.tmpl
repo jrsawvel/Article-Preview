@@ -1,0 +1,137 @@
+<!-- tmpl_include name="header.tmpl" -->
+
+
+<!-- tmpl_if errorexists -->
+<p>
+<h2>Article Input Error</strong></h2>
+<!-- tmpl_var name="errormessage" -->
+</p>
+<!-- /tmpl_if -->
+
+
+<!-- tmpl_if previewingpost -->
+
+<!----------- Article Start ------------> 
+
+
+<!-- tmpl_if usinglargeimageheader -->
+
+<!-- tmpl_if tint_header_image -->
+<div id="custom-article-largeimageheader" style="background-image: url('<!-- tmpl_var name="largeimageheaderurl" -->')">
+<!-- tmpl_else -->
+<div id="largeimageheader" style="background-image: url('<!-- tmpl_var name="largeimageheaderurl" -->')">
+<!-- /tmpl_if -->
+
+
+<!-- tmpl_if title_over_image -->
+  <div class="vertical">
+    <div id="article-title"><!-- tmpl_var name="title" --></div>
+<!-- tmpl_if using_aside -->
+    <div id="article-description"><em><!-- tmpl_var name="aside_text" --></em></div>
+<!-- /tmpl_if -->
+  </div>
+<!-- /tmpl_if -->
+
+</div>
+<!-- /tmpl_if -->
+
+
+
+
+
+
+<article>
+
+<!-- tmpl_if usingimageheader -->
+<center>
+<img src="<!-- tmpl_var name="imageheaderurl" -->">
+</center>
+<!-- /tmpl_if -->
+
+
+<header>
+
+<!-- tmpl_if reading_time -->
+<!--
+<div class="post-min-read"> 
+<!-- tmpl_var name="reading_time" --> min
+</div>
+-->
+<!-- /tmpl_if -->
+
+<hgroup>
+<!-- tmpl_unless title_over_image -->
+<h1 class="headingtext"><a href="/<!-- tmpl_var name="slug" -->"><!-- tmpl_var name="title" --></a></h1> 
+<!-- tmpl_if using_aside -->
+<aside><!-- tmpl_var name="aside_text" --></aside>
+<!-- /tmpl_if -->
+<!-- /tmpl_unless -->
+<!-- tmpl_if publish_info_at_top -->
+<div class="greytext publish-info"> 
+<a href="/<!-- tmpl_var name="author_profile" -->"><!-- tmpl_var name="author" --></a> - 
+ <!-- tmpl_var name="created_date" --> - <!-- tmpl_var name="created_time" -->
+<!-- tmpl_if reading_time -->
+ - <!-- tmpl_var name="reading_time" --> min
+<!-- /tmpl_if -->
+</div>
+<!-- /tmpl_if -->
+
+</hgroup>
+
+</header>
+
+
+<section class="article-body">
+<!-- tmpl_var name="html" -->
+</section> 
+
+<!-- tmpl_unless publish_info_at_top -->
+<footer class="greytext">
+<p> 
+by <a href="/<!-- tmpl_var name="author_profile" -->"><!-- tmpl_var name="author" --></a>
+ - <!-- tmpl_var name="word_count" --> words
+<!-- tmpl_if reading_time -->
+ - <!-- tmpl_var name="reading_time" --> min read
+<!-- /tmpl_if -->
+<br />
+created: <time datetime="<!-- tmpl_var name="created_date" --> <!-- tmpl_var name="created_time" -->"><!-- tmpl_var name="created_date" --> <!-- tmpl_var name="created_time" --></time>
+</p>
+</footer>
+<!-- /tmpl_unless -->
+
+</article>
+
+<!----------- Article End ------------> 
+
+<!-- /tmpl_if -->
+
+
+<!-- bottom of web page. 
+     uncomment this if you want to obtain the html for the entire page, 
+     but stop with the closing html tag and ignore everything after.
+
+</body>
+</html>
+-->
+
+
+
+<!-- markup -->
+
+<center>
+<form id="articleform" method="post" action="/createpost">
+<input type="hidden" name="post_location" value="text_area"> 
+
+<p>
+<textarea id="textareaboxpost" name="markup" rows="15" cols="60"><!-- tmpl_var name="markup" --></textarea>
+</p>
+
+<p>
+<input class="submitbutton" type="submit" name="sb" value="Preview">
+</p>
+
+</form>
+</center>
+
+<!-- tmpl_include name="footer.tmpl" -->
+

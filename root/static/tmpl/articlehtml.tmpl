@@ -1,0 +1,52 @@
+<!-- tmpl_include name="header.tmpl" -->
+
+
+<article>
+
+<header>
+
+<hgroup>
+<h1><!-- tmpl_var name="title" --></h1> 
+<!-- tmpl_if using_aside -->
+<aside><h2><!-- tmpl_var name="aside_text" --></h2></aside>
+<!-- /tmpl_if -->
+
+<div class="bluelink publish-info-top"> 
+<!-- <a href="/static"><!-- tmpl_var name="author" --></a> -  -->
+ <!-- tmpl_var name="created_date_top" --> 
+<!-- tmpl_if reading_time -->
+ - <!-- tmpl_var name="reading_time" --> min
+<!-- /tmpl_if -->
+</div>
+
+</hgroup>
+
+</header>
+
+<section class="article-body">
+<!-- tmpl_var name="html" -->
+</section> 
+
+<!-- tmpl_unless publish_info_at_top -->
+<footer class="bluelink publish-info-bottom">
+<p> 
+published: <time datetime="<!-- tmpl_var name="created_date" --> <!-- tmpl_var name="created_time" -->"><!-- tmpl_var name="created_date" --> - <!-- tmpl_var name="created_time" --></time>
+<!-- by <a href="/static"><!-- tmpl_var name="author" --></a> -->
+<!--  - <!-- tmpl_var name="word_count" --> words -->
+<!-- tmpl_if reading_time -->
+<!-- - <!-- tmpl_var name="reading_time" --> min read -->
+<!-- /tmpl_if -->
+
+<!--
+<br />
+tags:
+-->
+
+</p>
+</footer>
+<!-- /tmpl_unless -->
+
+</article>
+
+
+<!-- tmpl_include name="footer.tmpl" -->

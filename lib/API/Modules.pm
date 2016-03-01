@@ -1,0 +1,11 @@
+package Modules;
+use strict;
+use warnings;
+use diagnostics;
+use CGI::Carp qw(fatalsToBrowser);
+use CGI qw(:standard);
+use JSON::Any       qw(XS JSON DWIW);
+use API::Config;
+use API::Utils;
+use API::Error;
+1;
