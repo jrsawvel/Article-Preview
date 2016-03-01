@@ -1,0 +1,37 @@
+########
+# ARTICLE
+########
+
+server {
+	listen   80; 
+
+	server_name article.soupmode.com;
+
+        location ~ ^/(css/|javascript/|images/|static) {
+          root /home/article/Article/root;
+          access_log off;
+          expires max;
+        }
+
+        location /api/v1 {
+	     root /home/article/Article/root;
+             index articleapi.pl;
+             rewrite  ^/(.*)$ /articleapi.pl?query=$1 break;
+             fastcgi_pass  127.0.0.1:8999;
+             fastcgi_index articleapi.pl;
+             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+             include fastcgi_params;
+        }
+
+        location / {
+	     root /home/article/Article/root;
+             index article.pl;
+             rewrite  ^/(.*)$ /article.pl?query=$1 break;
+             fastcgi_pass  127.0.0.1:8999;
+             fastcgi_index article.pl;
+             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+             include fastcgi_params;
+        }
+}
+
+
