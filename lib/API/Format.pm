@@ -90,6 +90,7 @@ sub remove_power_commands {
     # hashtag_to_link=yes|no
     # markdown=yes|no - needed because the default markup for a note is textile. this overrides it.
     # newline_to_br=yes|no
+    # headings_as_links=yes|no
 
     $str =~ s|^toc[\s]*=[\s]*[noNOyesYES]+||mig;
     $str =~ s|^using_css[\s]*=[\s]*[noNOyesYES]+||mig;
@@ -100,6 +101,7 @@ sub remove_power_commands {
     $str =~ s|^hashtag_to_link[\s]*=[\s]*[noNOyesYES]+||mig;
     $str =~ s|^markdown[\s]*=[\s]*[noNOyesYES]+||mig;
     $str =~ s|^newline_to_br[\s]*=[\s]*[noNOyesYES]+||mig;
+    $str =~ s|^headings_as_links[\s]*=[\s]*[noNOyesYES]+||mig;
 
     return $str;
 }
@@ -201,7 +203,7 @@ sub markup_to_html {
 
     $html = custom_commands($html); 
 
-    $html = hashtag_to_link($html)  if get_power_command_on_off_setting_for("hashtag_to_link", $markup, 1);
+    $html = hashtag_to_link($html)  if get_power_command_on_off_setting_for("hashtag_to_link", $markup, 0);
 
     if ( $markup_type eq "textile" ) {
         my $textile = new Text::TextileArticle;
@@ -284,7 +286,7 @@ sub get_more_text_info {
     return { 'more_text_exists' => $more_text_exists, 'text_intro' => $text_intro };
 }
 
-sub _create_heading_list {
+sub create_heading_list {
     my $str  = shift;
     my $slug = shift;
 

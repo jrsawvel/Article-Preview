@@ -76,6 +76,18 @@ sub create_post {
                 $t->set_template_variable("imageheaderurl", $json->{imageheaderurl});
                 $t->set_template_variable("usingimageheader", 1);
             }
+
+            if ( $json->{toc} ) {
+                my @toc_loop = _create_table_of_contents($json->{html});
+                if ( @toc_loop ) {
+                    $t->set_template_variable("usingtoc", "1");
+                    $t->set_template_loop_data("toc_loop", \@toc_loop);
+                }    
+            } else {
+                $t->set_template_variable("usingtoc", "0");
+            }
+
+
             $t->display_page("Previewing new post");
             exit;
         }
@@ -85,5 +97,37 @@ sub create_post {
         Page->report_error("user", "Unable to complete request. Invalid response code returned from API.", "$json->{user_message} $json->{system_message}");
     }
 }
+
+sub _create_table_of_contents {
+    my $str = shift;
+
+    my @headers = ();
+    my @loop_data = ();
+
+    if ( @headers = $str =~ m{<!-- header:([1-6]):(.*?) -->}igs ) {
+        my $len = @headers;
+        for (my $i=0; $i<$len; $i+=2 ) {
+            my %hash = ();
+            $hash{level}      = $headers[$i];
+            $hash{toclink}    = $headers[$i+1];
+            $hash{cleantitle} = _clean_title($headers[$i+1]);
+            push(@loop_data, \%hash); 
+        }
+    }
+
+    return @loop_data;    
+}
+
+sub _clean_title {
+    my $str = shift;
+    $str =~ s|[-]||g;
+    $str =~ s|[ ]|-|g;
+    $str =~ s|[:]|-|g;
+    $str =~ s|--|-|g;
+    # only use alphanumeric, underscore, and dash in friendly link url
+    $str =~ s|[^\w-]+||g;
+    return $str;
+}
+
 
 1;

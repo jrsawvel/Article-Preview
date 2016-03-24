@@ -50,6 +50,9 @@ sub create_post {
 #    my $html            = Format::markup_to_html($o->get_after_title_markup(), $o->get_markup_type(), $slug);
     my $html            = Format::markup_to_html($page_data->{markup}, $o->get_markup_type(), $slug);
 
+    $html = Format::create_heading_list($html, $slug) if Format::get_power_command_on_off_setting_for("headings_as_links", $markup, 0);
+        
+
     my $hash_ref;
 
     if ( $submit_type eq "Preview" ) {
@@ -97,6 +100,7 @@ sub create_post {
         $hash_ref->{'tint_header_image'}    = Format::get_power_command_on_off_setting_for("tint_header_image", $markup, 0);
         $hash_ref->{'title_over_image'}     = Format::get_power_command_on_off_setting_for("title_over_image", $markup, 0);
         $hash_ref->{'publish_info_at_top'}  = Format::get_power_command_on_off_setting_for("publish_info_at_top", $markup, 0);
+        $hash_ref->{'toc'}                  = Format::get_power_command_on_off_setting_for("toc", $markup, 0);
         $hash_ref->{'custom_css'}           = $page_data->{custom_css};
 
         $hash_ref->{status}      = 200;

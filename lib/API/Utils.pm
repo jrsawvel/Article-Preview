@@ -168,14 +168,14 @@ sub is_valid_email {
 }
 
 sub clean_title {
-    my $str = shift;
-    $str =~ s|[ ]|_|g;
-    $str =~ s|[:]|_|g;
-    # only use alphanumeric, underscore, and dash in wiki link url
-    $str =~ s|[^\w-]+||g;
-#    $str =~ s|[^a-zA-Z_0-9-]+||g;
-#    $str =~ s|[^a-zA-Z_0-9-:]+||g;
-    return $str;
+        my $str = shift;
+        $str =~ s|[-]||g;
+        $str =~ s|[ ]|-|g;
+        $str =~ s|[:]|-|g;
+        $str =~ s|--|-|g;
+        # only use alphanumeric, underscore, and dash in friendly link url
+        $str =~ s|[^\w-]+||g;
+        return lc($str);
 }
    
 sub shuffle_array {
